@@ -28,7 +28,9 @@ jobs:
       - name: Build and Push Image
         run: |
           FILE=${{ matrix.dockerfile }}
-          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/my-app-${FILE,,}
+          BASENAME=$(echo $FILE | tr '[:upper:]' '[:lower:]')   # make lowercase
+          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/my-app-${BASENAME}
+          echo "Building and pushing $IMAGE_NAME:latest"
           docker build -f $FILE -t $IMAGE_NAME:latest .
           docker push $IMAGE_NAME:latest
 
