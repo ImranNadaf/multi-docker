@@ -27,8 +27,9 @@ jobs:
       # Build and push image
       - name: Build and Push Image
         run: |
-          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/my-app-${{ matrix.dockerfile }}
-          docker build -f ${{ matrix.dockerfile }} -t $IMAGE_NAME:latest .
+          FILE=${{ matrix.dockerfile }}
+          IMAGE_NAME=${{ secrets.DOCKERHUB_USERNAME }}/my-app-${FILE,,}
+          docker build -f $FILE -t $IMAGE_NAME:latest .
           docker push $IMAGE_NAME:latest
 
       # Scan with Trivy
