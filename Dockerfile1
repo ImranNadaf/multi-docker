@@ -2,4 +2,4 @@ FROM python:3.18-alpine
 WORKDIR /app
 COPY . .
 RUN pip install pytest
-CMD ["sh", "-c", "echo '🚀 Container 1 started After some 4th editing!' && python hello.py"]
+CMD ["sh", "-c", "echo '🚀 Container 1 started After some 5th editing!' && python hello.py"]
